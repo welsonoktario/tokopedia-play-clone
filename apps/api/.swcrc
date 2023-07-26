@@ -1,0 +1,21 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": true,
+      "dynamicImport": true
+    },
+    "target": "es2020",
+    "baseUrl": "./src",
+    "paths": {
+      "@controllers/*": ["controllers/*"],
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"],
+      "@routes/*": ["routes/*"]
+    }
+  },
+  "module": {
+    "type": "commonjs"
+  }
+}
