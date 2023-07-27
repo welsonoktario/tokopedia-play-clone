@@ -10,6 +10,7 @@
     "baseUrl": "./src",
     "paths": {
       "@controllers/*": ["controllers/*"],
+      "@helpers/*": ["helpers/*"],
       "@models/*": ["models/*"],
       "@services/*": ["services/*"],
       "@routes/*": ["routes/*"]

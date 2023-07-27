@@ -7,8 +7,9 @@
     "module": "es2020",
     "outDir": "dist",
     "paths": {
-      "@models/*": ["models/*"],
       "@controllers/*": ["controllers/*"],
+      "@helpers/*": ["helpers/*"],
+      "@models/*": ["models/*"],
       "@services/*": ["services/*"],
       "@routes/*": ["routes/*"]
     },

@@ -1,14 +1,12 @@
 import mongoose, { Schema } from 'mongoose'
 
-type UserType = {
-  name: string
-  email: string
+export type UserType = {
+  username: string
   avatar?: string
 }
 
-const UserSchema = new Schema<UserType>({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+export const UserSchema = new Schema<UserType>({
+  username: { type: String, required: true },
   avatar: { type: String, required: false },
 })
 
