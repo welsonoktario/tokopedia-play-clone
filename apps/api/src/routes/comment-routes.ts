@@ -1,3 +1,10 @@
-import express from 'express'
+import { Router } from 'express'
 
-const router = express.Router()
+import { createVideoComment, findAllVideoComments } from '@controllers/comment-controller'
+
+const commentRoutes: Router = Router()
+
+commentRoutes.get('/videos/:videoId/comments', findAllVideoComments)
+commentRoutes.post('/videos/:videoId/comments', createVideoComment)
+
+export default commentRoutes

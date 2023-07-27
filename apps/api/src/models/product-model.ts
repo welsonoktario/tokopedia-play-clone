@@ -1,15 +1,15 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Schema, Types } from 'mongoose'
 
 export type ProductType = {
-  id: string
+  productUrl: string
   title: string
-  caption?: string
+  price: number
 }
 
 export const ProductSchema = new Schema<ProductType>({
-  id: { type: String, required: true, unique: true },
+  productUrl: { type: String, required: true },
   title: { type: String, required: true },
-  caption: { type: String, required: false },
+  price: { type: Number, required: true },
 })
 
 export const Product = mongoose.model<ProductType>('Product', ProductSchema)

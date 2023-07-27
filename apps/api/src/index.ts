@@ -1,22 +1,22 @@
 import express from 'express'
 
-import videoRoutes from '@routes/video-routes'
+import { connectDb } from '@config/database'
 
-import { connectDb } from './config/db'
+import commentRoutes from '@routes/comment-routes'
+import productRoutes from '@routes/product-routes'
+import userRoutes from '@routes/user-routes'
+import videoRoutes from '@routes/video-routes'
 
 const app = express()
 app.use(express.json())
 
-app.use('/videos', videoRoutes)
+app.use('/api', userRoutes)
+app.use('/api', videoRoutes)
+app.use('/api', productRoutes)
+app.use('/api', commentRoutes)
 
 connectDb().then((db) => {
   app.listen(process.env.APP_PORT, () => {
-    console.info(
-      `Server running on http://${process.env.APP_HOST}:${process.env.APP_PORT}`,
-    )
-  })
-
-  app.get('/', (req, res) => {
-    res.send('Helo world!')
+    console.info(`Server running on http://${process.env.APP_HOST}:${process.env.APP_PORT}`)
   })
 })

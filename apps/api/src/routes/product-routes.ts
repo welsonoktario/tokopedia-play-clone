@@ -1,3 +1,10 @@
-import express from 'express'
+import { Router } from 'express'
 
-const router = express.Router()
+import { findAllVideoProducts, findProduct } from '@controllers/product-controller'
+
+const productRoutes: Router = Router()
+
+productRoutes.get('/videos/:videoId/products', findAllVideoProducts)
+productRoutes.get('/videos/:videoId/products/:productId', findProduct)
+
+export default productRoutes

@@ -6,7 +6,9 @@
     "lib": ["es2020"],
     "module": "es2020",
     "outDir": "dist",
+    "moduleResolution": "node",
     "paths": {
+      "@config/*": ["config/*"],
       "@controllers/*": ["controllers/*"],
       "@helpers/*": ["helpers/*"],
       "@models/*": ["models/*"],

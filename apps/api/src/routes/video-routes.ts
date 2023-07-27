@@ -1,27 +1,11 @@
-import express, { Router } from 'express'
+import { Router } from 'express'
 
-import { Video } from '@models/video-model'
+import { createVideo, findAllVideos, findVideo } from '@controllers/video-controller'
 
-import { statusFail, statusOK } from '@helpers/json-response'
+const videoRoutes: Router = Router()
 
-const videoRoutes: Router = express.Router()
-
-videoRoutes.get('/', async (req, res) => {
-  try {
-    const videos = await Video.find({})
-
-    statusOK({
-      res,
-      data: {
-        videos,
-      },
-    })
-  } catch (err: any) {
-    statusFail({
-      res,
-      msg: 'Error: ' + err.message,
-    })
-  }
-})
+videoRoutes.get('/videos', findAllVideos)
+videoRoutes.get('/videos/:videoId', findVideo)
+videoRoutes.post('/videos', createVideo)
 
 export default videoRoutes

@@ -1,13 +1,15 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Model, Schema, Types } from 'mongoose'
 
 export type UserType = {
+  _id: Types.ObjectId
   username: string
-  avatar?: string
+  avatarUrl?: string
 }
 
-export const UserSchema = new Schema<UserType>({
+type UserModelType = Model<UserType>
+export const UserSchema = new Schema<UserType, UserModelType>({
   username: { type: String, required: true },
-  avatar: { type: String, required: false },
+  avatarUrl: { type: String, required: false },
 })
 
-export const User = mongoose.model<UserType>('User', UserSchema)
+export const User = mongoose.model<UserType, UserModelType>('User', UserSchema)

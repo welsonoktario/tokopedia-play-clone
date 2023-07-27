@@ -1,20 +1,20 @@
-import mongoose from 'mongoose'
+import { Schema, Types, model } from 'mongoose'
 
 import { CommentSchema, CommentType } from './comment-model'
 import { ProductSchema, ProductType } from './product-model'
 
 export type VideoType = {
-  id: string
   thumbnailUrl: string
-  product: ProductType[]
-  comments: CommentType[]
+  user: Types.ObjectId
+  products?: Types.DocumentArray<ProductType>
+  comments?: Types.DocumentArray<CommentType>
 }
 
-export const VideoSchema = new mongoose.Schema<VideoType>({
-  id: { type: String, required: true, unique: true },
+export const VideoSchema = new Schema<VideoType>({
+  user: { type: 'ObjectId', required: true, ref: 'User' },
   thumbnailUrl: { type: String, required: true },
-  product: { type: [ProductSchema], default: [] },
-  comments: { type: [CommentSchema], default: [] },
+  products: { type: [ProductSchema], required: false, default: [], _id: true },
+  comments: { type: [CommentSchema], required: false, default: [], _id: true },
 })
 
-export const Video = mongoose.model<VideoType>('Video', VideoSchema)
+export const Video = model<VideoType>('Video', VideoSchema)
