@@ -1,4 +1,5 @@
 import { Types } from 'mongoose'
+import slugify from 'slugify'
 
 import { Product } from '@models/product-model'
 import { Video } from '@models/video-model'
@@ -35,12 +36,7 @@ export const getProductById = async (videoId: Types.ObjectId, productId: Types.O
   }
 }
 
-export const insertProduct = async (
-  videoId: Types.ObjectId,
-  productUrl: string,
-  title: string,
-  price: number,
-) => {
+export const insertProduct = async (videoId: Types.ObjectId, title: string, price: number) => {
   try {
     const video = await Video.findById(videoId)
 
@@ -49,13 +45,15 @@ export const insertProduct = async (
     }
 
     const product = new Product({
-      productUrl,
+      productUrl: slugify(title),
       title,
       price,
     })
-    video.products?.push(product)
+    video.products!.push(product)
 
-    return await video.save()
+    await video.save()
+
+    return product
   } catch (err: any) {
     throw new Error(err.message)
   }
