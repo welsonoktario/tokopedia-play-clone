@@ -45,7 +45,7 @@ export const insertProduct = async (videoId: Types.ObjectId, title: string, pric
     }
 
     const product = new Product({
-      productUrl: slugify(title),
+      productUrl: slugify(title, { lower: true }),
       title,
       price,
     })
