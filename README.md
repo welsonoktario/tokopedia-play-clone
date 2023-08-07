@@ -47,7 +47,7 @@ tokopedia_play_clone       (db)
 ```
 
 ## API Structure
-For detailed API structure and endpoints, please refer to this [Postman API Documentation](https://documenter.getpostman.com/view/28771381/2s9XxsUwBV)
+For detailed API structure and endpoints, please refer to this [Postman API Documentation](https://documenter.getpostman.com/view/28036821/2s9XxztXxZ)
 
 ## Additional Resource
 To help with the API testing, this repo also included with Postman Collection inside ```docs``` folder.
