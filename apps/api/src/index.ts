@@ -15,7 +15,7 @@ app.use('/api', videoRoutes)
 app.use('/api', productRoutes)
 app.use('/api', commentRoutes)
 
-connectDb().then((db) => {
+connectDb().then((_db) => {
   app.listen(process.env.APP_PORT, () => {
     console.info(`Server running on http://${process.env.APP_HOST}:${process.env.APP_PORT}`)
   })
