@@ -1,3 +1,4 @@
+import cors from 'cors'
 import express from 'express'
 
 import { connectDb } from '@config/database'
@@ -9,6 +10,12 @@ import videoRoutes from '@routes/video-routes'
 
 const app = express()
 app.use(express.json())
+app.use(
+  cors({
+    allowedHeaders: '*',
+    origin: 'http://localhost:3000',
+  }),
+)
 
 app.use('/api', userRoutes)
 app.use('/api', videoRoutes)
