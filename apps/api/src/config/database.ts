@@ -8,6 +8,7 @@ const dsn =
   DB_USER && DB_PASSWORD
     ? `${DB_URL}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`
     : `${DB_URL}://${DB_HOST}:${DB_PORT}/${DB_NAME}?retryWrites=true&w=majority`
+console.log(dsn)
 
 export const connectDb = async () =>
   await mongoose.connect(dsn, {

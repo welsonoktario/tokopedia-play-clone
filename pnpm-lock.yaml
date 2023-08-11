@@ -142,6 +142,9 @@ importers:
       vite:
         specifier: ^4.4.9
         version: 4.4.9(@types/node@20.4.9)
+      vite-tsconfig-paths:
+        specifier: ^4.2.0
+        version: 4.2.0(typescript@5.1.6)(vite@4.4.9)
 
   packages/eslint-config-base:
     dependencies:
@@ -159,7 +162,7 @@ importers:
         version: 8.8.0(eslint@8.46.0)
       eslint-config-turbo:
         specifier: latest
-        version: 1.9.3(eslint@8.46.0)
+        version: 1.10.12(eslint@8.46.0)
       eslint-plugin-react:
         specifier: ^7.33.0
         version: 7.33.0(eslint@8.46.0)
@@ -180,7 +183,7 @@ importers:
         version: 8.8.0(eslint@8.46.0)
       eslint-config-turbo:
         specifier: latest
-        version: 1.9.3(eslint@8.46.0)
+        version: 1.10.12(eslint@8.46.0)
       eslint-plugin-react:
         specifier: ^7.33.0
         version: 7.33.0(eslint@8.46.0)
@@ -2112,6 +2115,11 @@ packages:
       no-case: 2.3.2
     dev: true
 
+  /dotenv@16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: false
+
   /dotenv@16.3.1:
     resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
@@ -2286,13 +2294,13 @@ packages:
       eslint: 8.46.0
     dev: false
 
-  /eslint-config-turbo@1.9.3(eslint@8.46.0):
-    resolution: {integrity: sha512-QG6jxFQkrGSpQqlFKefPdtgUfr20EbU0s4tGGIuGFOcPuJEdsY6VYZpZUxNJvmMcTGqPgMyOPjAFBKhy/DPHLA==}
+  /eslint-config-turbo@1.10.12(eslint@8.46.0):
+    resolution: {integrity: sha512-z3jfh+D7UGYlzMWGh+Kqz++hf8LOE96q3o5R8X4HTjmxaBWlLAWG+0Ounr38h+JLR2TJno0hU9zfzoPNkR9BdA==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
       eslint: 8.46.0
-      eslint-plugin-turbo: 1.9.3(eslint@8.46.0)
+      eslint-plugin-turbo: 1.10.12(eslint@8.46.0)
     dev: false
 
   /eslint-plugin-react-hooks@4.6.0(eslint@8.46.0):
@@ -2336,11 +2344,12 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: false
 
-  /eslint-plugin-turbo@1.9.3(eslint@8.46.0):
-    resolution: {integrity: sha512-ZsRtksdzk3v+z5/I/K4E50E4lfZ7oYmLX395gkrUMBz4/spJlYbr+GC8hP9oVNLj9s5Pvnm9rLv/zoj5PVYaVw==}
+  /eslint-plugin-turbo@1.10.12(eslint@8.46.0):
+    resolution: {integrity: sha512-uNbdj+ohZaYo4tFJ6dStRXu2FZigwulR1b3URPXe0Q8YaE7thuekKNP+54CHtZPH9Zey9dmDx5btAQl9mfzGOw==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
+      dotenv: 16.0.3
       eslint: 8.46.0
     dev: false
 
@@ -2843,6 +2852,10 @@ packages:
       ignore: 5.2.4
       merge2: 1.4.1
       slash: 3.0.0
+
+  /globrex@0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
+    dev: true
 
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
@@ -4744,6 +4757,19 @@ packages:
       yn: 3.1.1
     dev: true
 
+  /tsconfck@2.1.2(typescript@5.1.6):
+    resolution: {integrity: sha512-ghqN1b0puy3MhhviwO2kGF8SeMDNhEbnKxjK7h6+fvY9JAxqvXi8y5NAHSQv687OVboS2uZIByzGd45/YxrRHg==}
+    engines: {node: ^14.13.1 || ^16 || >=18}
+    hasBin: true
+    peerDependencies:
+      typescript: ^4.3.5 || ^5.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 5.1.6
+    dev: true
+
   /tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
@@ -4942,6 +4968,23 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
     dev: false
+
+  /vite-tsconfig-paths@4.2.0(typescript@5.1.6)(vite@4.4.9):
+    resolution: {integrity: sha512-jGpus0eUy5qbbMVGiTxCL1iB9ZGN6Bd37VGLJU39kTDD6ZfULTTb1bcc5IeTWqWJKiWV5YihCaibeASPiGi8kw==}
+    peerDependencies:
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+    dependencies:
+      debug: 4.3.4
+      globrex: 0.1.2
+      tsconfck: 2.1.2(typescript@5.1.6)
+      vite: 4.4.9(@types/node@20.4.9)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+    dev: true
 
   /vite@4.4.9(@types/node@20.4.9):
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}

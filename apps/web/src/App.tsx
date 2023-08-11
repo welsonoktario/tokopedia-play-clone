@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { UserProvider } from '@/components/UserContext'
+import { useFetch } from '@/hooks/useFetch'
+import { VideoType } from '@/types/video'
+import { useState } from 'react'
+
+import './App.css'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/api/videos")
-      .then((res) => res.json())
-      .then((res) => console.log(res));
-  }, []);
+  const [count, setCount] = useState(0)
+  const { loading, data, error } = useFetch<Array<VideoType>>(
+    'http://localhost:3001/api/videos',
+  )
 
   return (
-    <>
+    <UserProvider>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -35,9 +36,17 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
 
-      <h1>NOT YET IMPLEMENTED</h1>
-    </>
-  );
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <pre>
+          <code>{data?.toString()}</code>
+        </pre>
+      )}
+    </UserProvider>
+  )
 }
 
-export default App;
+export default App
