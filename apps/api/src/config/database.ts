@@ -1,7 +1,7 @@
 import { configDotenv } from 'dotenv'
 import mongoose from 'mongoose'
 
-configDotenv()
+configDotenv({ path: `.env.${process.env.NODE_ENV}` })
 
 const { DB_URL, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env
 const dsn =

@@ -1,51 +1,36 @@
-import { UserProvider } from '@/components/UserContext'
-import { useFetch } from '@/hooks/useFetch'
-import { VideoType } from '@/types/video'
-import { useState } from 'react'
+import loadable from '@loadable/component'
+import { Theme } from '@radix-ui/themes'
+import { Suspense } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import './App.css'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Navbar } from '@/components'
+import { useTheme } from '@/hooks'
 
-function App() {
-  const [count, setCount] = useState(0)
-  const { loading, data, error } = useFetch<Array<VideoType>>(
-    'http://localhost:3001/api/videos',
-  )
+const App = () => {
+  const theme = useTheme()
+
+  const HomePage = loadable(() => import('@/pages/Home'), {
+    resolveComponent: (component) => component.HomePage,
+  })
+  const VideoPage = loadable(() => import('@/pages/Video'), {
+    resolveComponent: (component) => component.VideoPage,
+  })
 
   return (
-    <UserProvider>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        <pre>
-          <code>{data?.toString()}</code>
-        </pre>
-      )}
-    </UserProvider>
+    <Theme
+      accentColor="green"
+      grayColor="mauve"
+      radius="large"
+      suppressHydrationWarning
+    >
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route index path="/" element={<HomePage />} />
+          <Route path="videos/:videoId" element={<VideoPage />} />
+        </Routes>
+      </BrowserRouter>
+    </Theme>
   )
 }
 
