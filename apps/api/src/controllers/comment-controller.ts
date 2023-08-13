@@ -24,9 +24,7 @@ export const findAllVideoComments = async (req: Request, res: Response) => {
 
     statusOK({
       res,
-      data: {
-        comments,
-      },
+      data: comments,
     })
   } catch (err: any) {
     statusFail({
@@ -64,7 +62,7 @@ export const createVideoComment = async (req: Request, res: Response) => {
 
     statusCreated({
       res,
-      data: { comment },
+      data: comment,
       msg: 'Comment successfully added',
     })
   } catch (err: any) {

@@ -4,7 +4,7 @@ import { Video } from '@models/video-model'
 
 export const getAllVideos = async () => {
   try {
-    return await Video.find()
+    return await Video.find().select(['id', 'title', 'thumbnailUrl', 'user']).populate('user')
   } catch (err: any) {
     throw new Error(err.message)
   }

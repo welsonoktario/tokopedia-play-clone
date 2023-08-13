@@ -1,9 +1,10 @@
-import { CommentType } from "./comment"
-import { ProductType } from "./product"
-import { UserType } from "./user"
+import { CommentType } from './comment'
+import { ProductType } from './product'
+import { UserType } from './user'
 
 export type VideoType = {
-  id: string
+  _id: string
+  title: string
   thumbnailUrl: string
   user: UserType
   products: Array<ProductType>

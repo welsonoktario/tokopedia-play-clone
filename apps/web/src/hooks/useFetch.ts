@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
 
-type JsonResponseType<T = unknown> = {
-  status: string
-  data: T
-}
+import { doFetch } from '@/helpers/fetch'
 
-const BASE_API_URL = import.meta.env.VITE_API_URL
-
-export const useFetch = <T = unknown>(url: `/${string}`, options?: RequestInit) => {
+export const useFetch = <T = unknown>(
+  url: `/${string}`,
+  options?: RequestInit,
+) => {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<T | undefined>(undefined)
   const [error, setError] = useState('')
@@ -17,21 +15,24 @@ export const useFetch = <T = unknown>(url: `/${string}`, options?: RequestInit) 
       return
     }
 
-    const doFetch = async () => {
+    const initFetch = async () => {
       setLoading(true)
       try {
-        const res = await fetch(BASE_API_URL + url, options)
-        const json = (await res.json()) as JsonResponseType<T>
+        const data = await doFetch<T>(url, options)
 
-        setData(json.data)
+        setData(data)
       } catch (err: any) {
-        setError(err.message)
+        if (err instanceof Error) {
+          setError(err.message)
+        } else {
+          setError('An error occurred, please try again later')
+        }
       } finally {
         setLoading(false)
       }
     }
 
-    doFetch()
+    initFetch()
   }, [url])
 
   return { loading, data, error }

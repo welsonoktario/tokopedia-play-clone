@@ -12,9 +12,7 @@ export const findAllVideos = async (req: Request, res: Response) => {
 
     statusOK({
       res,
-      data: {
-        videos,
-      },
+      data: videos,
     })
   } catch (err: any) {
     statusFail({
@@ -42,9 +40,7 @@ export const findVideo = async (req: Request, res: Response) => {
 
     statusOK({
       res,
-      data: {
-        video,
-      },
+      data: video,
     })
   } catch (err: any) {
     statusFail({ res, msg: err.message })
@@ -75,7 +71,7 @@ export const createVideo = async (req: Request, res: Response) => {
 
     statusCreated({
       res,
-      data: { video },
+      data: video,
       msg: 'Video successfully added',
     })
   } catch (err: any) {

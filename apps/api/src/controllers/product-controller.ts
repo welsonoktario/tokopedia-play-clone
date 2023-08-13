@@ -23,9 +23,7 @@ export const findAllVideoProducts = async (req: Request, res: Response) => {
 
     statusOK({
       res,
-      data: {
-        products,
-      },
+      data: products,
     })
   } catch (err: any) {
     statusFail({
@@ -62,9 +60,7 @@ export const findProduct = async (req: Request, res: Response) => {
 
     statusOK({
       res,
-      data: {
-        product,
-      },
+      data: product,
     })
   } catch (err: any) {
     statusFail({ res, msg: err.message })
@@ -97,7 +93,7 @@ export const createProduct = async (req: Request, res: Response) => {
 
     statusOK({
       res,
-      data: { product },
+      data: product,
       msg: 'Product created successfully',
     })
   } catch (err: any) {

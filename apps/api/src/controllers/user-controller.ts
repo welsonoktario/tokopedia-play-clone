@@ -10,9 +10,7 @@ export const findAllUsers = async (req: Request, res: Response) => {
 
     statusOK({
       res,
-      data: {
-        users,
-      },
+      data: users,
     })
   } catch (err: any) {
     statusFail({ res, msg: err.message })
@@ -31,9 +29,7 @@ export const findUserByUsername = async (req: Request, res: Response) => {
 
     statusOK({
       res,
-      data: {
-        user,
-      },
+      data: user,
     })
   } catch (err: any) {
     statusFail({ res, msg: err.message })
@@ -52,7 +48,7 @@ export const createUser = async (req: Request, res: Response) => {
     if (await user.save()) {
       statusOK({
         res,
-        data: { user },
+        data: user,
         msg: 'User successfully added',
       })
     } else {

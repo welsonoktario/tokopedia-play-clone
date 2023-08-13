@@ -1,7 +1,7 @@
 import { UserType } from './user'
 
 export type CommentType = {
-  id: string
+  _id: string
   user: UserType
   comment: string
   timestamp: string

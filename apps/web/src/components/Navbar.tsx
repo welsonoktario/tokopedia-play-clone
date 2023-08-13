@@ -1,25 +1,30 @@
-import { css } from '@linaria/core'
-import { Box, Flex, Heading } from '@radix-ui/themes'
+import { Box, Container, Flex, Heading } from '@radix-ui/themes'
 import { Link } from 'react-router-dom'
 
-import { useAuth } from '@/hooks'
+import { AuthMenu } from './NavbarMenus/AuthMenu'
+import { ThemeMenu } from './NavbarMenus/ThemeMenu'
 
 export const Navbar = () => {
-  const { user } = useAuth()
-  const linkStyle = css`
-    text-decoration: none;
-  `
-
   return (
-    <Box position="sticky" p="4" top="0" left="0" right="0">
+    <Container
+      position="sticky"
+      p="4"
+      top="0"
+      left="0"
+      right="0"
+      style={{ background: 'var(--mauve-2)', zIndex: 999 }}
+    >
       <Box>
-        <Flex direction="row" width="100%" align="center" justify="between">
-          <Link to="/" className={linkStyle}>
+        <Flex width="100%" align="center" justify="between">
+          <Link to="/" style={{ textDecoration: 'none' }}>
             <Heading color="green">Tokopedia Play (Clone)</Heading>
           </Link>
-          <Box>{user ? user.username : 'Sign-in'}</Box>
+          <Flex gap="2">
+            <AuthMenu />
+            <ThemeMenu />
+          </Flex>
         </Flex>
       </Box>
-    </Box>
+    </Container>
   )
 }
