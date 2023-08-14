@@ -6,25 +6,51 @@ import {
   Text,
   TextField,
 } from '@radix-ui/themes'
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 
-type AuthDialogPropsType = {
-  onAuthFormSubmit: (e: FormEvent<HTMLFormElement>) => void
-  onUsernameChange: (username: string) => void
-  validationError?: string
-}
+import { doFetch } from '@/helpers/fetch'
+import { useAuth } from '@/hooks'
+import { UserType } from '@/types'
 
-export const AuthDialog = ({
-  onAuthFormSubmit,
-  onUsernameChange,
-  validationError = '',
-}: AuthDialogPropsType) => {
+export const AuthDialog = () => {
+  const { setUser } = useAuth()
+  const { setIsDialogOpen } = useAuth()!
+  const [username, setUsername] = useState('')
+  const [validationError, setValidationError] = useState('')
+
+  const handleSignIn = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (username.includes(' ')) {
+      setValidationError("Username can't contain space(s)")
+    }
+
+    if (!/^[a-z0-9]+$/.test(username)) {
+      setValidationError(
+        'Username can only contains lowercase alphanumeric (a-z and 0-9) characters',
+      )
+    }
+
+    if (!validationError) {
+      try {
+        const user = await doFetch<UserType>('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({ username }),
+          credentials: 'include',
+        })
+
+        setUser(user)
+        setIsDialogOpen(false)
+      } catch (err: any) {}
+    }
+  }
+
   return (
-    <Dialog.Content>
+    <Dialog.Content style={{ maxWidth: '32%' }}>
       <Dialog.Title>Welcome back!</Dialog.Title>
       <Dialog.Description mb="5">Sign-in to your account.</Dialog.Description>
 
-      <form onSubmit={onAuthFormSubmit}>
+      <form onSubmit={handleSignIn}>
         {validationError && (
           <Text size="1" color="red">
             {validationError}
@@ -32,16 +58,17 @@ export const AuthDialog = ({
         )}
         <TextField.Root color={validationError ? 'red' : 'green'}>
           <TextField.Slot>
-            <Text size="2">Username</Text>
+            <Text size="3">Username</Text>
           </TextField.Slot>
           <TextField.Input
-            onChange={(e) => onUsernameChange(e.target.value)}
+            size="3"
+            onChange={(e) => setUsername(e.target.value)}
             name="username"
             placeholder="Enter your username or create a new one"
             required
           />
           <TextField.Slot>
-            <Button type="submit" variant="ghost">
+            <Button size="3" type="submit" variant="ghost">
               Sign-in
             </Button>
           </TextField.Slot>
@@ -49,8 +76,10 @@ export const AuthDialog = ({
       </form>
 
       <Flex mt="5" gap="3" justify="end">
-        <DialogClose>
-          <Button variant="surface">Close</Button>
+        <DialogClose onClick={() => setIsDialogOpen(false)}>
+          <Button size="3" variant="surface">
+            Close
+          </Button>
         </DialogClose>
       </Flex>
     </Dialog.Content>

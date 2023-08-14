@@ -9,7 +9,7 @@ export const ThemeMenu = () => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <IconButton variant="surface" size="3">
+        <IconButton variant="ghost" size='3'>
           {theme === 'dark' && <MoonIcon width="20" height="20" />}
           {theme === 'light' && <SunIcon width="20" height="20" />}
         </IconButton>

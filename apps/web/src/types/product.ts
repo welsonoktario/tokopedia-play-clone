@@ -1,5 +1,5 @@
 export type ProductType = {
-  _id: String
+  _id: string
   title: string
   price: number
   url: string

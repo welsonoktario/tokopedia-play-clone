@@ -23,7 +23,7 @@ export const ProductCard = ({ product }: ProductCardPropsType) => {
         <Heading size="1" className={styles.productCardTitle}>
           {product.title}
         </Heading>
-        <Text as="p" size="3" weight="bold" color="amber">
+        <Text as="p" size="3" weight="bold" color="tomato">
           {product.price.toLocaleString('id-ID', {
             style: 'currency',
             currency: 'IDR',
@@ -31,7 +31,12 @@ export const ProductCard = ({ product }: ProductCardPropsType) => {
         </Text>
       </Box>
       <Inset side="bottom">
-        <Button className={styles.productCardLink} variant="soft" asChild>
+        <Button
+          className={styles.productCardLink}
+          variant="soft"
+          size="3"
+          asChild
+        >
           <Link
             href={product.url}
             target="_blank"

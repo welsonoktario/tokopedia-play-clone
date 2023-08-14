@@ -8,7 +8,7 @@ export const AppRoutes = () => {
   const HomePage = loadable(() => import('@/pages/Home'), {
     resolveComponent: (component) => component.HomePage,
   })
-  const VideoPage = loadable(() => import('@/pages/Video'), {
+  const VideoPage = loadable(() => import('@/pages/Video/Video'), {
     resolveComponent: (component) => component.VideoPage,
   })
 

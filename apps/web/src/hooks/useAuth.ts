@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 
+import { AuthContext } from '@/components/AuthContext'
 import { doFetch } from '@/helpers/fetch'
 import { UserType } from '@/types/user'
 
 export const useAuth = () => {
-  const [user, setUser] = useState<UserType | undefined>(undefined)
+  const auth = useContext(AuthContext)!
 
   const login = async (username: string) => {
     if (username) {
       try {
-        const user = await doFetch<UserType>(`/users/${username}`)
-        setUser(user)
+        const data = await doFetch<UserType>(`/users/${username}`)
+        auth.setUser(data)
       } catch (err) {
         console.log(err)
       }
@@ -18,11 +19,11 @@ export const useAuth = () => {
   }
 
   const logout = () => {
-    if (user) {
+    if (auth.user) {
       document.cookie = 'auth=; expires=' + new Date(0).toUTCString()
-      setUser(undefined)
+      auth.setUser(undefined)
     }
   }
 
-  return { user, setUser, login, logout }
+  return { ...auth, login, logout }
 }
