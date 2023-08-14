@@ -75,10 +75,13 @@ export const VideoCard = ({
         <Flex align="center" gap="2">
           <Avatar
             src={user.avatarUrl}
+            radius="full"
             fallback={`https://ui-avatars.com/api/?name=${user.username}`}
             size="2"
           ></Avatar>
-          <Text>{user.username}</Text>
+          <Text style={{ color: 'hsl(300, 26.0%, 99.0%)' }}>
+            {user.username}
+          </Text>
         </Flex>
       </Flex>
     </Box>

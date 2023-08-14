@@ -5,8 +5,8 @@
 }
 
 .card-video-overlay {
-  background: var(--mauve-1);
-  background: linear-gradient(0deg, var(--mauve-1), transparent, transparent);
+  background: hsl(260, 10.0%, 13.5%);
+  background: linear-gradient(0deg, hsl(260, 10.0%, 13.5%), transparent, transparent);
   transition: all ease-in-out 200ms;
 }
 
@@ -16,8 +16,8 @@
 }
 
 .card-video:hover .card-video-overlay {
-  opacity: 0.8;
-  background: var(--mauve-1);
+  opacity: 0.6;
+  background: hsl(260, 10.0%, 13.5%);
 }
 
 .card-video:hover .card-video-overlay-content {
@@ -33,6 +33,7 @@
 }
 
 .card-video-title {
+  color: hsl(300, 26.0%, 99.0%);
   display: block;
   overflow: hidden;
   white-space: nowrap;

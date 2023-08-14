@@ -54,6 +54,11 @@ export const createVideoComment = async (req: Request, res: Response) => {
     const videoObjectId = new Types.ObjectId(videoId)
 
     const user = await getUserByUsername(body.username)
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
     const comment = await insertVideoComment(videoObjectId, user.username, body.comment)
 
     if (!comment) {

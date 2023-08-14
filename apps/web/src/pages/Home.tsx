@@ -22,24 +22,6 @@ export const HomePage = withTransition(() => {
               thumbnailUrl={video.thumbnailUrl}
             />
           ))}
-          {data.map((video) => (
-            <VideoCard
-              key={video._id}
-              id={video._id}
-              user={video.user}
-              title={video.title}
-              thumbnailUrl={video.thumbnailUrl}
-            />
-          ))}
-          {data.map((video) => (
-            <VideoCard
-              key={video._id}
-              id={video._id}
-              user={video.user}
-              title={video.title}
-              thumbnailUrl={video.thumbnailUrl}
-            />
-          ))}
         </Grid>
       ) : (
         <Text>No videos available right now :)</Text>
