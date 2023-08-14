@@ -30,14 +30,24 @@ export const insertVideoComment = async (
       throw new Error('Video data not found')
     }
 
-    video.comments!.push(
-      new Comment({
-        username,
-        comment,
-      }),
-    )
+    const user = await User.findOne({ username })
 
-    return await video.save()
+    if (!user) {
+      throw new Error('User data not found')
+    }
+
+    const commentModel = new Comment({
+      user,
+      comment,
+    })
+
+    video.comments!.push(commentModel)
+
+    const insert = await video.save()
+
+    if (insert) {
+      return commentModel
+    }
   } catch (err: any) {
     throw new Error(err.message)
   }

@@ -1,13 +1,14 @@
 import { Model, Schema, model } from 'mongoose'
+import { UserSchema, UserType } from './user-model'
 
 export type CommentType = {
-  username: string
+  user: UserType
   comment: string
   timestamp?: Date
 }
 type CommentModelType = Model<CommentType>
 export const CommentSchema = new Schema<CommentType, CommentModelType>({
-  username: { type: String, required: true },
+  user: { type: UserSchema, required: true },
   comment: { type: String, required: true },
   timestamp: { type: Date, required: false, default: Date.now },
 })
